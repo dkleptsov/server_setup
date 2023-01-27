@@ -1,5 +1,43 @@
+# Adding non root user
+1. Change root password
+~~~~
+sudo passwd root
+~~~~
+2. Check unwanted users
+~~~~
+less /etc/passwd
+~~~~
+3. Add non root sudo user
+~~~~
+adduser dev
+~~~~
+~~~~
+adduser dev sudo
+~~~~
+
+# Update system
+~~~~
+sudo apt-get update
+~~~~
+~~~~
+sudo apt-get upgrade
+~~~~
+
+# Security settings
+~~~~
+sudo nano /etc/ssh/sshd_config
+~~~~
+~~~~
+Port 100
+PermitRootLogin no
+MaxAuthTries 3
+PermitEmptyPasswords no
+HostbasedAuthentication no
+IgnoreRhosts yes
+~~~~
+
 # Setting up notifications about ssh logins
-1. Add bot token and recipient information
+1. Add bot token and recipient information in telegram-send.sh
 ~~~~
 NOTIFICATION_BOT=""
 ~~~~
@@ -27,6 +65,23 @@ chmod +x login-notify.sh
 ~~~~
 sudo cp login-notify.sh /etc/profile.d/login-notify.sh
 ~~~~
+
+# Enter env variables
+~~~~
+cd && sudo nano .bashrc
+~~~~
+~~~~
+#rg_bot_main
+export INOAGENT_BOT=''
+#rg_bot_test
+export TEST_FLIGHT_BOT=''
+export PATH=$PATH:/home/dev/rg_tg_bot/monitoring/geckodriver/geckodriver
+~~~~
+
+# Install Docker
+* [Debian](https://docs.docker.com/engine/install/debian/)
+* [Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
+* [Post install](https://docs.docker.com/engine/install/linux-postinstall/)
 
 # Installing Outline VPN
 ~~~~
