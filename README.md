@@ -23,20 +23,68 @@ sudo apt-get update
 sudo apt-get upgrade
 ~~~~
 
+# Adding ssh key to server
+1. On a remote
+~~~~
+cd && mkdir .ssh
+~~~~
+2. On local machine
+~~~~
+scp /Users/dev/.ssh/key.pub dev@server:/home/dev/.ssh/uploaded_key.pub
+~~~~
+3. On a remote
+~~~~
+cat ~/.ssh/uploaded_key.pub >> ~/.ssh/authorized_keys
+chmod 700 ~/.ssh/
+chmod 600 ~/.ssh/*
+~~~~
+
 # Security settings
 ~~~~
 sudo nano /etc/ssh/sshd_config
 ~~~~
 ~~~~
 Port 100
+LoginGraceTime 2m
 PermitRootLogin no
-MaxAuthTries 3
-PermitEmptyPasswords no
+MaxAuthTries 4
+AuthorizedKeysFile      .ssh/authorized_keys 
 HostbasedAuthentication no
 IgnoreRhosts yes
+PasswordAuthentication no
+PermitEmptyPasswords no
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
+UsePAM no
+~~~~
+~~~~
+sudo systemctl reload ssh
 ~~~~
 
-# Setting up notifications about ssh logins
+# Enter env variables
+~~~~
+cd && sudo nano .bashrc
+~~~~
+~~~~
+#convenience
+alias ll='ls -alF'
+#rg_bot_main
+export INOAGENT_BOT=''
+#rg_bot_test
+export TEST_FLIGHT_BOT=''
+export PATH=$PATH:/home/dev/rg_tg_bot/monitoring/geckodriver/geckodriver
+~~~~
+
+# Install Docker
+* [Debian](https://docs.docker.com/engine/install/debian/) [Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
+* [Post install](https://docs.docker.com/engine/install/linux-postinstall/)
+
+# Installing Outline VPN
+~~~~
+sudo bash -c "$(wget -qO- https://raw.githubusercontent.com/Jigsaw-Code/outline-server/master/src/server_manager/install_scripts/install_server.sh)"
+~~~~
+
+# Setting up telegram notifications about ssh logins
 1. Add bot token and recipient information in telegram-send.sh
 ~~~~
 NOTIFICATION_BOT=""
@@ -64,26 +112,4 @@ chmod +x login-notify.sh
 7. Copy script 
 ~~~~
 sudo cp login-notify.sh /etc/profile.d/login-notify.sh
-~~~~
-
-# Enter env variables
-~~~~
-cd && sudo nano .bashrc
-~~~~
-~~~~
-#rg_bot_main
-export INOAGENT_BOT=''
-#rg_bot_test
-export TEST_FLIGHT_BOT=''
-export PATH=$PATH:/home/dev/rg_tg_bot/monitoring/geckodriver/geckodriver
-~~~~
-
-# Install Docker
-* [Debian](https://docs.docker.com/engine/install/debian/)
-* [Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
-* [Post install](https://docs.docker.com/engine/install/linux-postinstall/)
-
-# Installing Outline VPN
-~~~~
-sudo bash -c "$(wget -qO- https://raw.githubusercontent.com/Jigsaw-Code/outline-server/master/src/server_manager/install_scripts/install_server.sh)"
 ~~~~
