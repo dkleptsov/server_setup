@@ -39,6 +39,12 @@ chmod 700 ~/.ssh/
 chmod 600 ~/.ssh/*
 ~~~~
 
+# Git config
+~~~~
+git config --global user.name "name"
+git config --global user.email "email"
+~~~~
+
 # Security settings
 ~~~~
 sudo nano /etc/ssh/sshd_config
