@@ -30,19 +30,15 @@ cd && mkdir .ssh
 ~~~~
 2. On local machine
 ~~~~
-scp /Users/dev/.ssh/key.pub dev@server:/home/dev/.ssh/uploaded_key.pub
+ssh-keygen -t ed25519 -a 100 -C "List of services"
+scp /Users/dev/.ssh/key.pub dev@SERVER_IP:/home/dev/.ssh/uploaded_key.pub
+ssh-copy-id -i /Users/dev/.ssh/key.pub dev@SERVER_IP
 ~~~~
 3. On a remote
 ~~~~
 cat ~/.ssh/uploaded_key.pub >> ~/.ssh/authorized_keys
 chmod 700 ~/.ssh/
 chmod 600 ~/.ssh/*
-~~~~
-
-# Git config
-~~~~
-git config --global user.name "name"
-git config --global user.email "email"
 ~~~~
 
 # Security settings
@@ -54,17 +50,23 @@ Port 100
 LoginGraceTime 2m
 PermitRootLogin no
 MaxAuthTries 4
+PubkeyAuthentication yes
 AuthorizedKeysFile      .ssh/authorized_keys 
 HostbasedAuthentication no
 IgnoreRhosts yes
 PasswordAuthentication no
-PermitEmptyPasswords no
 PermitEmptyPasswords no
 ChallengeResponseAuthentication no
 UsePAM no
 ~~~~
 ~~~~
 sudo systemctl reload ssh
+~~~~
+
+# Git config
+~~~~
+git config --global user.name "name"
+git config --global user.email "email"
 ~~~~
 
 # Enter env variables
