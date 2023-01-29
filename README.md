@@ -10,10 +10,14 @@ less /etc/passwd
 3. Add non root sudo user
 ~~~~
 adduser dev
-~~~~
-~~~~
 adduser dev sudo
 ~~~~
+4. Change name of server
+~~~
+sudo nano /etc/hostname
+sudo nano /etc/hosts
+sudo reboot
+~~~
 
 # Update system
 ~~~~
