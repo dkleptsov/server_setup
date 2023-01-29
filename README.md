@@ -17,10 +17,7 @@ adduser dev sudo
 
 # Update system
 ~~~~
-sudo apt-get update
-~~~~
-~~~~
-sudo apt-get upgrade
+sudo apt-get update && sudo apt upgrade -y
 ~~~~
 
 # Adding ssh key to server
@@ -63,11 +60,33 @@ UsePAM no
 sudo systemctl reload ssh
 ~~~~
 
-# Git config
+# Git
 ~~~~
+sudo apt install git
 git config --global user.name "name"
 git config --global user.email "email"
 ~~~~
+
+# Install Docker and Docker compose
+* [Debian](https://docs.docker.com/engine/install/debian/) [Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
+* [Post install](https://docs.docker.com/engine/install/linux-postinstall/)
+* Install VS Code extension
+~~~~
+sudo reboot
+sudo apt install docker-compose
+~~~~
+
+# Install pip
+~~~~
+sudo apt install python3-pip
+~~~~
+
+# Install mkvirtualenv
+~~~~
+sudo pip install virtualenvwrapper
+~~~~
+[docs](https://virtualenvwrapper.readthedocs.io/en/latest/install.html)
+[problems](https://stackoverflow.com/questions/62911093/virtualenvwrapper-command-not-found-but-can-be-installed-with)
 
 # Enter env variables
 ~~~~
@@ -75,21 +94,21 @@ cd && sudo nano .bashrc
 ~~~~
 ~~~~
 #convenience
-alias ll='ls -alF'
-#rg_bot_main
+alias ll='ls -la'
+alias python='python3'
+
+# rg_bot_main
 export INOAGENT_BOT=''
-#rg_bot_test
+
+# rg_bot_test
 export TEST_FLIGHT_BOT=''
 export PATH=$PATH:/home/dev/rg_tg_bot/monitoring/geckodriver/geckodriver
-~~~~
 
-# Install Docker
-* [Debian](https://docs.docker.com/engine/install/debian/) [Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
-* [Post install](https://docs.docker.com/engine/install/linux-postinstall/)
-
-# Installing Outline VPN
-~~~~
-sudo bash -c "$(wget -qO- https://raw.githubusercontent.com/Jigsaw-Code/outline-server/master/src/server_manager/install_scripts/install_server.sh)"
+# mkvirtualenv
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Devel
+export VIRTUALENVWRAPPER_PYTHON='/usr/bin/python3'
+source /usr/local/bin/virtualenvwrapper.sh
 ~~~~
 
 # Setting up telegram notifications about ssh logins
@@ -120,4 +139,9 @@ chmod +x login-notify.sh
 7. Copy script 
 ~~~~
 sudo cp login-notify.sh /etc/profile.d/login-notify.sh
+~~~~
+
+# Installing Outline VPN
+~~~~
+sudo bash -c "$(wget -qO- https://raw.githubusercontent.com/Jigsaw-Code/outline-server/master/src/server_manager/install_scripts/install_server.sh)"
 ~~~~
