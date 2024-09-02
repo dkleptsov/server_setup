@@ -1,4 +1,4 @@
-# Adding non root user
+# Add non root user
 1. Change root password
 ~~~~
 sudo passwd root
@@ -24,7 +24,7 @@ sudo reboot
 sudo apt-get update && sudo apt upgrade -y
 ~~~~
 
-# Adding ssh key to server
+# Add ssh key to server
 1. On a remote
 ~~~~
 cd && mkdir .ssh
@@ -115,7 +115,7 @@ export VIRTUALENVWRAPPER_PYTHON='/usr/bin/python3'
 source /usr/local/bin/virtualenvwrapper.sh
 ~~~~
 
-# Setting up telegram notifications about ssh logins
+# Set up telegram notifications about ssh logins
 1. Add bot token and recipient information in telegram-send.sh
 ~~~~
 NOTIFICATION_BOT=""
@@ -145,7 +145,12 @@ chmod +x login-notify.sh
 sudo cp login-notify.sh /etc/profile.d/login-notify.sh
 ~~~~
 
-# Installing Outline VPN
+# Install Outline VPN
 ~~~~
 sudo bash -c "$(wget -qO- https://raw.githubusercontent.com/Jigsaw-Code/outline-server/master/src/server_manager/install_scripts/install_server.sh)"
+~~~~
+
+# Rename server
+~~~~
+sudo nano /etc/hostname
 ~~~~
