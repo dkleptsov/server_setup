@@ -145,11 +145,6 @@ chmod +x login-notify.sh
 sudo cp login-notify.sh /etc/profile.d/login-notify.sh
 ~~~~
 
-# Install Outline VPN
-~~~~
-sudo bash -c "$(wget -qO- https://raw.githubusercontent.com/Jigsaw-Code/outline-server/master/src/server_manager/install_scripts/install_server.sh)"
-~~~~
-
 # Rename server
 ~~~~
 sudo nano /etc/hostname
